@@ -30,8 +30,38 @@
   </div>
   <div class="font-sans text-gray-900 antialiased">
     {{ $slot }}
+    @yield('content')
   </div>
 
   @livewireScripts
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // success message
+    window.addEventListener('swal:success', function(e) {
+      Swal.fire(e.detail);
+    });
+
+    window.addEventListener('swal:confirm', event => {
+      Swal.fire({
+        title: 'Are you sure?'
+        , text: "You wont be able to revert this!"
+        , icon: 'warning'
+        , showCancelButton: true
+        , cancelButtonColor: '#f11'
+        , confirmButtonText: 'Yes delete it'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Livewire.emit('deleteConfirm');
+          // Swal.fire(
+          //   'Deleted!'
+          //   , 'Your file has been deleted'
+          //   , 'success'
+          // )
+        }
+      });
+    });
+
+  </script>
 </body>
 </html>

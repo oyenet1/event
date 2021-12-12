@@ -5,7 +5,7 @@
       <div class="w-full max-w-md text-medium">{{ $events->links() }}</div>
     </div>
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 lg:gap-12">
-      @foreach ($events as $item)
+      @forelse ($events as $item)
       <div class="rounded bg-white overflow-hidden relative transform transition duration-500 hover:scale-110">
         <img src="/img/event2.jpg" alt="" class="w-full">
         <div class="m-0 py-3 px-4 ">
@@ -14,11 +14,14 @@
             <span class="font-semibold text-pink-600">&#8358;{{ moneyFormat($item->amount) }}</span>
           </p>
           <p class="absolute top-0 right-0 m-3 p-1 px-3 font-medium font-mono rounded-3xl text-xs bg-yellow-500 text-white">{{ returnDateTime($item->date) }}</p>
-          <button wire:click="attend({{ $item->id }})" class="text-center border-2 capitalize rounded-3xl transform transition duration-500 my-3 w-full py-2 font-semibold hover:text-white border-pink-600 hover:bg-pink-600 text-pink-600">Click to attend</button>
+          <a href="/event/{{ $item->id }}" class="text-center border-2 capitalize rounded-3xl transform transition block duration-500 my-3 w-full py-2 font-semibold hover:text-white border-pink-600 hover:bg-pink-600 text-pink-600">Click to attend</a>
           </p>
         </div>
       </div>
-      @endforeach
+      @empty
+      <h1 class="text-3xl font-extrabold">No event now</h1>
+
+      @endforelse
     </div>
   </div>
 </div>
