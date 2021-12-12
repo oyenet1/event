@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,14 @@ Route::get('events', App\Http\Livewire\Event::class);
 Route::get('event/{event:id}', App\Http\Livewire\Ticket::class)->name('event');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $tickets = Ticket::with(['sales'])->paginate(10);
+    return view('dashboard', compact('tickets'));
 })->middleware(['auth'])->name('dashboard');
+
+
+Route::get('/sales', App\Http\Livewire\Sales::class)->middleware(['auth'])->name('sales');
+
+
 
 // payment
 
@@ -31,4 +38,4 @@ Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToG
 // redirected back
 Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

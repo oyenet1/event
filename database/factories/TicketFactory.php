@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TicketFactory extends Factory
 {
-    public $names = ['football', 'marriage', 'music', 'cinema', 'advert', 'product show'];
+    public $names = ['football', 'marriage', 'music', 'cinema', 'advert', 'product show', 'wizkid-show', 'olamide show', 'omay-lay', 'Adekunle Gold'];
     public $status = ['active', 'expired'];
     /**
      * Define the model's default state.

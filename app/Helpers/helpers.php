@@ -32,6 +32,12 @@ function returnDateTime($date)
   $date = date_format($date, 'H:iA, d M');
   return $date;
 }
+function returnTime($date)
+{
+  $date = date_create($date);
+  $date = date_format($date, 'H:ia');
+  return $date;
+}
 function moneyFormat($money)
 {
   $salary =  number_format("$money", 2);
